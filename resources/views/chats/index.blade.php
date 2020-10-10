@@ -34,7 +34,7 @@
             <form method="post" id="send-message">
                 @csrf
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="輸入訊息" name="content">
+                    <input type="text" class="form-control" placeholder="輸入訊息" name="content" autocomplete="off">
                     <div class="input-group-append" id="button-addon4">
                         <button class="btn btn-outline-secondary" type="button"><i class="far fa-image fa-fw"></i></button>
                         <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-paper-plane fa-fw"></i></button>
