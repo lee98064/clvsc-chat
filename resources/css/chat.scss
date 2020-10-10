@@ -1,0 +1,68 @@
+*{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chatbox{
+    height: 100vh;
+    
+    .card-header{
+        height: 6vh;
+        font-size: 1.7rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .card-body{
+        height: 84vh;
+        overflow-x: auto;
+
+        .message{
+            display: flex;
+            // align-items: center;
+            float: left;
+            clear: both;
+            margin-bottom: 10px;
+            .author-img{
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .message-group{
+                margin-left: 5px;
+
+                .author{
+                    margin-left: 3px;
+                }
+                .message-text{
+                    background-color: #eeeeee;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        .me{
+            flex-direction: row-reverse;
+            float: right;
+            clear: both;
+            .message-group{
+
+                .author{
+                    margin-right: 3px;
+                    text-align: right;
+                }
+
+                .message-text{
+                    background-color: #007bff;
+                    color: white;
+                }
+            }
+        }
+
+
+    }
+    .card-footer{
+        height: 10vh;
+    }
+}
