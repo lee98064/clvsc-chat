@@ -15,7 +15,7 @@ class ChatsController extends Controller
 
     public function index()
     {
-        $messages = Message::with('user')->orderBy('created_at', 'ASC')->take(50)->get();
+        $messages = Message::with('user')->orderBy('created_at', 'ASC')->take(-50)->get();
 
         return view('chats.index',['messages' => $messages]);
     }
