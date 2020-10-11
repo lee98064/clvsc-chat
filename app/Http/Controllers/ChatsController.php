@@ -33,8 +33,16 @@ class ChatsController extends Controller
             ]);
             $message = auth()->user()->messages()->create($content);
         }
-        
+
         $message = Message::with('user')->find($message->id);
+        broadcast(new \App\Events\OnlinechatEvent($message))->toOthers();
+        return response()->json($message);
+    }
+
+    public function destroy($id)
+    {
+        $message = auth()->user()->messages->find($id);
+        $message->delete();
         broadcast(new \App\Events\OnlinechatEvent($message))->toOthers();
         return response()->json($message);
     }

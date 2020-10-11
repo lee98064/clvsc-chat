@@ -94,7 +94,9 @@
 /***/ (function(module, exports) {
 
 Echo.channel('onlinechat').listen('OnlinechatEvent', function (e) {
-  if (e.message.content != null) {
+  if (e.message.deleted_at != null) {
+    $('div[data-msid=' + e.message.id + ']').children('.message-group').children('.message-text').html("對方已收回訊息");
+  } else if (e.message.content != null) {
     var html = '<div class="message" data-msid="' + e.message.id + '"><img class="author-img" src="' + e.message.user.profile_photo_url + '" alt="' + e.message.user.name + '">';
     html += '<div class="message-group"><div class="author text-muted">' + e.message.user.name;
     html += '</div><div class="message-text">' + e.message.content + '</div></div></div>';
@@ -121,7 +123,7 @@ $(document).ready(function () {
         dataType: "JSON",
         success: function success(response) {
           var html = '<div class="message me" data-msid="' + response.id + '"><div class="message-group"><div class="author text-muted">' + response.user.name;
-          html += '</div><div class="message-text">' + response.content + '</div></div></div>';
+          html += '</div><div class="message-text">' + response.content + '</div></div><button class="btn btn-light btn-sm remove-message" data-msid="' + response.id + '"><i class="fas fa-trash fa-fw"></i></button></div>';
           $('.chatbox>.card-body').append(html);
           $("input[name='content']").val("");
           $("input[name='content']").focus();
@@ -166,7 +168,7 @@ $(document).ready(function () {
         dataType: "JSON",
         success: function success(response) {
           var html = '<div class="message me" data-msid="' + response.id + '"><div class="message-group"><div class="author text-muted">' + response.user.name;
-          html += '</div><div class="message-text"><img src="' + response.attachment + '" href="' + response.attachment + '"></div></div></div>';
+          html += '</div><div class="message-text"><img src="' + response.attachment + '" href="' + response.attachment + '"></div></div><button class="btn btn-light btn-sm remove-message" data-msid="' + response.id + '"><i class="fas fa-trash fa-fw"></i></button></div>';
           $('.chatbox>.card-body').append(html);
           $("input[name='content']").val("");
           $("input[name='content']").focus();
@@ -184,6 +186,29 @@ $(document).ready(function () {
       });
     } else {
       alert("請選擇圖片!");
+    }
+  });
+  $(document).on('click', '.remove-message', function () {
+    e = $(this);
+
+    if (confirm("確定收回這則訊息?")) {
+      $.ajax({
+        type: "POST",
+        url: "/chats/" + $(this).data('msid'),
+        data: {
+          _token: $("input[name='_token']").prop('value'),
+          _method: 'delete'
+        },
+        dataType: "JSON",
+        success: function success(response) {
+          $('div[data-msid="' + response.id + '"]').children('.message-group').children('.message-text').html("您已收回訊息");
+          $('div[data-msid="' + response.id + '"]').data('msid', 'N');
+          e.remove();
+        },
+        error: function error(response) {
+          alert('收回失敗');
+        }
+      });
     }
   });
   $(".message").magnificPopup({

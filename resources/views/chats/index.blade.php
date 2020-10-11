@@ -20,6 +20,7 @@
                                 @endif
                             </div>
                         </div>
+                        <button class="btn btn-light btn-sm remove-message" data-msid="{{ $message->id }}"><i class="fas fa-trash fa-fw"></i></button>
                     </div>  
                 @else
                     <div class="message" data-msid="{{ $message->id }}">
@@ -34,7 +35,7 @@
                                 @endif
                             </div>
                         </div>
-                </div>  
+                    </div>  
                 @endif
             @endforeach
         </div>

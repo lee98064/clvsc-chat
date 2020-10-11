@@ -58,6 +58,7 @@
 }
 
 .chatbox .card-body .me {
+  position: relative;
   flex-direction: row-reverse;
   float: right;
   clear: both;
@@ -71,6 +72,18 @@
 .chatbox .card-body .me .message-group .message-text {
   background-color: #007bff;
   color: white;
+}
+
+.chatbox .card-body .me .remove-message {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
 }
 
 .chatbox .card-footer {

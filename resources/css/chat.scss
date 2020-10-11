@@ -53,6 +53,7 @@
         }
 
         .me{
+            position: relative;
             flex-direction: row-reverse;
             float: right;
             clear: both;
@@ -67,6 +68,17 @@
                     background-color: #007bff;
                     color: white;
                 }
+            }
+            .remove-message{
+                position: absolute;
+                top: 50%;
+                left: -20px;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(-50%);
             }
         }
 
