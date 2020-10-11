@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Message;
 
 class ChatsController extends Controller
@@ -22,10 +23,17 @@ class ChatsController extends Controller
 
     public function store(Request $request)
     {
-        $content = $request->validate([
-            'content' => 'required'
-        ]);
-        $message = auth()->user()->messages()->create($content);
+        if ($request->hasFile('attachment')){
+            $image = $request->file('attachment');
+            $file_path = $image->store('public/message-img');
+            $message = auth()->user()->messages()->create(['attachment' => Storage::url($file_path)]);
+        }else{
+            $content = $request->validate([
+                'content' => 'required',
+            ]);
+            $message = auth()->user()->messages()->create($content);
+        }
+        
         $message = Message::with('user')->find($message->id);
         broadcast(new \App\Events\OnlinechatEvent($message))->toOthers();
         return response()->json($message);

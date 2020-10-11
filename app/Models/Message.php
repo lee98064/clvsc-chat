@@ -15,5 +15,5 @@ class Message extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    protected $fillable = ['content'];
+    protected $fillable = ['content','attachment'];
 }

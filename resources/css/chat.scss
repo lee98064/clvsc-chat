@@ -4,6 +4,8 @@
 
 .chatbox{
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     
     .card-header{
         height: 6vh;
@@ -13,7 +15,8 @@
     }
 
     .card-body{
-        height: 84vh;
+        // height: 84vh;
+        flex-grow: 1;
         overflow-x: auto;
 
         .message{
@@ -38,6 +41,13 @@
                     background-color: #eeeeee;
                     padding: 8px 16px;
                     border-radius: 20px;
+
+                    img{
+                        width: 100%;
+                        max-width: 500px;
+                        max-height: 500px;
+                        object-fit: cover;
+                    }
                 }
             }
         }
