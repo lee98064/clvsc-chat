@@ -115,14 +115,6 @@ $(document).ready(function () {
         }
     });
 
-    $(".message").magnificPopup({
-        delegate: 'img',
-        type: 'image',
-        gallery: {
-            enabled: false
-        }
-    });
-
     img_gallery();
     scrolldown();
 });
@@ -135,7 +127,7 @@ function scrolldown() {
 
 
 function img_gallery() {
-    $(".message").magnificPopup({
+    $(".message-text").magnificPopup({
         delegate: 'img',
         type: 'image',
         gallery: {
